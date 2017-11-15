@@ -14,28 +14,8 @@ import java.util.*
 /**
  * Created by rishabhkhanna on 14/11/17.
  */
-class RecyclerAdapter(internal var arrayList: ArrayList<String>, internal var context: Context) : RecyclerView.Adapter<RecyclerAdapter.Holder>(), ItemTouchHelperAdapter {
+class RecyclerAdapter(internal var arrayList: ArrayList<String>, internal var context: Context) : RecyclerView.Adapter<RecyclerAdapter.Holder>() {
     val TAG = "TopicAdapter"
-    override fun onItemMoved(fromPosition: Int, toPosition: Int) {
-        Log.d(TAG, "onItemMoved: FROM: " + fromPosition)
-        Log.d(TAG, "onItemMoved: TO: " + toPosition)
-        if (fromPosition < toPosition) {
-            for (i in fromPosition until toPosition) {
-                Collections.swap(arrayList, i, i + 1)
-            }
-        } else {
-            for (i in fromPosition downTo toPosition + 1) {
-                Collections.swap(arrayList, i, i - 1)
-            }
-        }
-        notifyItemMoved(fromPosition, toPosition)
-    }
-
-    override fun onMoved(fromPos: Int, toPos: Int) {
-        Log.d(TAG, "onSwipe: FROM: " + fromPos)
-        Log.d(TAG, "onSwipe: TO: " + toPos)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         return Holder(li.inflate(R.layout.item_layout, parent, false))
