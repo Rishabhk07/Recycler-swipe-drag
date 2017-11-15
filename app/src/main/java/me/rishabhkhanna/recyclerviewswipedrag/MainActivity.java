@@ -7,7 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
+import me.rishabhkhanna.recyclerswipedrag.ItemTouchHelperAdapter;
 import me.rishabhkhanna.recyclerswipedrag.RecyclerHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,15 +22,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-
+        dataArrayList = getData();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         RecyclerAdapter recyclerAdapter = new RecyclerAdapter(dataArrayList,this);
         recyclerView.setAdapter(recyclerAdapter);
-        ItemTouchHelper.Callback touchHelper = new RecyclerHelper(recyclerAdapter);
+//      Library addition from here
+        RecyclerHelper touchHelper = new RecyclerHelper(dataArrayList,(RecyclerView.Adapter)recyclerAdapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(touchHelper);
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        dataArrayList.addAll(getData());
-        recyclerAdapter.notifyDataSetChanged();
     }
 
     public static ArrayList<String> getData(){
