@@ -10,6 +10,10 @@ import kotlin.collections.ArrayList
  * Created by rishabhkhanna on 14/11/17.
  */
 class RecyclerHelper<T>(var list: ArrayList<T>,var mAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) : ItemTouchHelper.Callback(), ItemTouchHelperAdapter {
+
+    var onDragListener:onDragListener? = null
+    var onSwipeListener:onSwipeListener? = null
+
     override fun onMoved(fromPos: Int, toPos: Int) {
         list.removeAt(toPos)
         mAdapter.notifyItemRemoved(toPos)
@@ -28,12 +32,14 @@ class RecyclerHelper<T>(var list: ArrayList<T>,var mAdapter: RecyclerView.Adapte
 
     override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, target: RecyclerView.ViewHolder?): Boolean {
         onItemMoved(viewHolder!!.adapterPosition, target!!.adapterPosition)
+        onDragListener!!.onDragItemListener(viewHolder!!.adapterPosition, target!!.adapterPosition)
         return true;
     }
 
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
         onMoved(viewHolder!!.oldPosition, viewHolder.adapterPosition)
+        onSwipeListener!!.onSwipeItemListener()
     }
 
     override fun isLongPressDragEnabled(): Boolean {
@@ -44,5 +50,12 @@ class RecyclerHelper<T>(var list: ArrayList<T>,var mAdapter: RecyclerView.Adapte
         return true;
     }
 
+    fun setOnDragItemListener(onDragListener: onDragListener){
+        this.onDragListener = onDragListener
+    }
+
+    fun setOnSwipeItemListener(onSwipeListener: onSwipeListener){
+        this.onSwipeListener = onSwipeListener
+    }
 
 }
