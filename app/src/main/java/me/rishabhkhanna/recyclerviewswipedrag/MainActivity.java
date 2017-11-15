@@ -27,20 +27,21 @@ public class MainActivity extends AppCompatActivity {
         RecyclerAdapter recyclerAdapter = new RecyclerAdapter(dataArrayList,this);
         recyclerView.setAdapter(recyclerAdapter);
 //      Library addition from here
-        RecyclerHelper touchHelper = new RecyclerHelper(dataArrayList,(RecyclerView.Adapter)recyclerAdapter);
+        RecyclerHelper touchHelper = new RecyclerHelper<String>(dataArrayList,(RecyclerView.Adapter)recyclerAdapter);
+
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(touchHelper);
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     public static ArrayList<String> getData(){
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("Iron Man");
-        arrayList.add("Batman");
-        arrayList.add("Super Man");
-        arrayList.add("Captain America");
-        arrayList.add("Thor : God of Thunder");
-        arrayList.add("Hulk");
-        arrayList.add("Wonder Woman");
+        arrayList.add("1.");
+        arrayList.add("2.");
+        arrayList.add("3.");
+        arrayList.add("4.");
+        arrayList.add("5.");
+        arrayList.add("6.");
+        arrayList.add("7.");
         return arrayList;
     }
 }
