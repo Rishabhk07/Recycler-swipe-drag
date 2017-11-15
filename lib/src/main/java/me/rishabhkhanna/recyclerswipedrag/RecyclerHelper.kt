@@ -4,33 +4,24 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Created by rishabhkhanna on 14/11/17.
  */
-class RecyclerHelper(var list: ArrayList<String>,var mAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) : ItemTouchHelper.Callback(), ItemTouchHelperAdapter {
+class RecyclerHelper<T>(var list: ArrayList<T>,var mAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) : ItemTouchHelper.Callback(), ItemTouchHelperAdapter {
     override fun onMoved(fromPos: Int, toPos: Int) {
-        Log.d("TAG","From: " + fromPos)
-        Log.d("TAG","To: " + toPos)
         list.removeAt(toPos)
         mAdapter.notifyItemRemoved(toPos)
     }
 
     override fun onItemMoved(fromPosition: Int, toPosition: Int) {
-        if (fromPosition < toPosition) {
-            for (i in fromPosition until toPosition) {
-                Collections.swap(list, i, i + 1)
-            }
-        } else {
-            for (i in fromPosition downTo  toPosition + 1){
-                Collections.swap(list,i, i-1);
-            }
-        }
+        Collections.swap(list, fromPosition, toPosition)
         mAdapter.notifyItemMoved(fromPosition,toPosition)
     }
 
     override fun getMovementFlags(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?): Int {
-        var dragFlags: Int = ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT;
+        var dragFlags: Int = ItemTouchHelper.UP or ItemTouchHelper.DOWN;
         var swipeFlags: Int = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT;
         return makeMovementFlags(dragFlags, swipeFlags);
     }
@@ -40,10 +31,6 @@ class RecyclerHelper(var list: ArrayList<String>,var mAdapter: RecyclerView.Adap
         return true;
     }
 
-    override fun onMoved(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, fromPos: Int, target: RecyclerView.ViewHolder?, toPos: Int, x: Int, y: Int) {
-        onItemMoved(fromPos, toPos)
-        super.onMoved(recyclerView, viewHolder, fromPos, target, toPos, x, y)
-    }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
         onMoved(viewHolder!!.oldPosition, viewHolder.adapterPosition)
@@ -56,5 +43,6 @@ class RecyclerHelper(var list: ArrayList<String>,var mAdapter: RecyclerView.Adap
     override fun isItemViewSwipeEnabled(): Boolean {
         return true;
     }
+
 
 }
