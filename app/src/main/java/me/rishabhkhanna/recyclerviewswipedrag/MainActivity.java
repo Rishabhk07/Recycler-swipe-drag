@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 import me.rishabhkhanna.recyclerswipedrag.ItemTouchHelperAdapter;
 import me.rishabhkhanna.recyclerswipedrag.RecyclerHelper;
+import me.rishabhkhanna.recyclerswipedrag.onDragListener;
+import me.rishabhkhanna.recyclerswipedrag.onSwipeListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,9 +29,21 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         RecyclerAdapter recyclerAdapter = new RecyclerAdapter(dataArrayList,this);
         recyclerView.setAdapter(recyclerAdapter);
+
 //      Library addition from here
         RecyclerHelper touchHelper = new RecyclerHelper<String>(dataArrayList,(RecyclerView.Adapter)recyclerAdapter);
-
+        touchHelper.setRecyclerItemDragEnabled(true).setOnDragItemListener(new onDragListener() {
+            @Override
+            public void onDragItemListener(int fromPosition, int toPosition) {
+                Log.d(TAG, "onDragItemListener: ");
+            }
+        });
+        touchHelper.setRecyclerItemSwipeEnabled(true).setOnSwipeItemListener(new onSwipeListener() {
+            @Override
+            public void onSwipeItemListener() {
+                Log.d(TAG, "onSwipeItemListener: ");
+            }
+        });
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(touchHelper);
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
