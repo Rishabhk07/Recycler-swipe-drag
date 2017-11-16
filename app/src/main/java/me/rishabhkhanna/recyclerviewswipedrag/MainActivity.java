@@ -33,13 +33,13 @@ public class MainActivity extends AppCompatActivity {
         touchHelper.setRecyclerItemDragEnabled(true).setOnDragItemListener(new onDragListener() {
             @Override
             public void onDragItemListener(int fromPosition, int toPosition) {
-                Log.d(TAG, "onDragItemListener: ");
+                Log.d(TAG, "onDragItemListener: callback after dragging recycler view item");
             }
         });
         touchHelper.setRecyclerItemSwipeEnabled(true).setOnSwipeItemListener(new onSwipeListener() {
             @Override
             public void onSwipeItemListener() {
-                Log.d(TAG, "onSwipeItemListener: ");
+                Log.d(TAG, "onSwipeItemListener: callback after swiping recycler view item");
             }
         });
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(touchHelper);
