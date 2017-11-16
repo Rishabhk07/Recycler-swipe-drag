@@ -13,6 +13,8 @@ class RecyclerHelper<T>(var list: ArrayList<T>,var mAdapter: RecyclerView.Adapte
 
     var onDragListener:onDragListener? = null
     var onSwipeListener:onSwipeListener? = null
+    private var isItemDragEnabled:Boolean = false
+    private var isItemSwipeEnbled:Boolean = false
 
     override fun onMoved(fromPos: Int, toPos: Int) {
         list.removeAt(toPos)
@@ -25,8 +27,14 @@ class RecyclerHelper<T>(var list: ArrayList<T>,var mAdapter: RecyclerView.Adapte
     }
 
     override fun getMovementFlags(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?): Int {
-        var dragFlags: Int = ItemTouchHelper.UP or ItemTouchHelper.DOWN;
-        var swipeFlags: Int = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT;
+        var dragFlags: Int = 0;
+        var swipeFlags: Int = 0;
+        if(isItemDragEnabled) {
+            dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN;
+        }
+        if (isItemSwipeEnbled){
+            swipeFlags = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT;
+        }
         return makeMovementFlags(dragFlags, swipeFlags);
     }
 
@@ -50,12 +58,24 @@ class RecyclerHelper<T>(var list: ArrayList<T>,var mAdapter: RecyclerView.Adapte
         return true;
     }
 
-    fun setOnDragItemListener(onDragListener: onDragListener){
-        this.onDragListener = onDragListener
+    fun setRecyclerItemDragEnabled(isDragEnabled: Boolean): RecyclerHelper<T>{
+        this.isItemDragEnabled = isDragEnabled
+        return this;
     }
 
-    fun setOnSwipeItemListener(onSwipeListener: onSwipeListener){
+    fun setRecyclerItemSwipeEnabled(isSwipeEnabled: Boolean): RecyclerHelper<T>{
+        this.isItemSwipeEnbled = isSwipeEnabled
+        return this;
+    }
+
+    fun setOnDragItemListener(onDragListener: onDragListener): RecyclerHelper<T>{
+        this.onDragListener = onDragListener
+        return this;
+    }
+
+    fun setOnSwipeItemListener(onSwipeListener: onSwipeListener): RecyclerHelper<T>{
         this.onSwipeListener = onSwipeListener
+        return this;
     }
 
 }
