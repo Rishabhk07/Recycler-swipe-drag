@@ -8,9 +8,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
-import me.rishabhkhanna.recyclerswipedrag.ItemTouchHelperAdapter;
 import me.rishabhkhanna.recyclerswipedrag.RecyclerHelper;
 import me.rishabhkhanna.recyclerswipedrag.onDragListener;
 import me.rishabhkhanna.recyclerswipedrag.onSwipeListener;

@@ -2,20 +2,16 @@ package me.rishabhkhanna.recyclerviewswipedrag
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-import me.rishabhkhanna.recyclerswipedrag.ItemTouchHelperAdapter
 import java.util.*
 
 /**
  * Created by rishabhkhanna on 14/11/17.
  */
 class RecyclerAdapter(internal var arrayList: ArrayList<String>, internal var context: Context) : RecyclerView.Adapter<RecyclerAdapter.Holder>() {
-    val TAG = "TopicAdapter"
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         return Holder(li.inflate(R.layout.item_layout, parent, false))
