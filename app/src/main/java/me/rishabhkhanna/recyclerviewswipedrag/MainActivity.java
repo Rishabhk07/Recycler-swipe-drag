@@ -10,14 +10,15 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import me.rishabhkhanna.recyclerswipedrag.RecyclerHelper;
-import me.rishabhkhanna.recyclerswipedrag.onDragListener;
-import me.rishabhkhanna.recyclerswipedrag.onSwipeListener;
+import me.rishabhkhanna.recyclerswipedrag.OnDragListener;
+import me.rishabhkhanna.recyclerswipedrag.OnSwipeListener;
 
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ArrayList<String> dataArrayList = new ArrayList<>();
     public static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,18 +26,18 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         dataArrayList = getData();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(dataArrayList,this);
+        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(dataArrayList, this);
         recyclerView.setAdapter(recyclerAdapter);
 
 //      Library addition from here
-        RecyclerHelper touchHelper = new RecyclerHelper<String>(dataArrayList,(RecyclerView.Adapter)recyclerAdapter);
-        touchHelper.setRecyclerItemDragEnabled(true).setOnDragItemListener(new onDragListener() {
+        RecyclerHelper touchHelper = new RecyclerHelper<String>(dataArrayList, (RecyclerView.Adapter) recyclerAdapter);
+        touchHelper.setRecyclerItemDragEnabled(true).setOnDragItemListener(new OnDragListener() {
             @Override
             public void onDragItemListener(int fromPosition, int toPosition) {
                 Log.d(TAG, "onDragItemListener: callback after dragging recycler view item");
             }
         });
-        touchHelper.setRecyclerItemSwipeEnabled(true).setOnSwipeItemListener(new onSwipeListener() {
+        touchHelper.setRecyclerItemSwipeEnabled(true).setOnSwipeItemListener(new OnSwipeListener() {
             @Override
             public void onSwipeItemListener() {
                 Log.d(TAG, "onSwipeItemListener: callback after swiping recycler view item");
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
-    public static ArrayList<String> getData(){
+    public static ArrayList<String> getData() {
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("1.");
         arrayList.add("2.");

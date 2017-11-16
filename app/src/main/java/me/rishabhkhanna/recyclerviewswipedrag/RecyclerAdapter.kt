@@ -25,7 +25,7 @@ class RecyclerAdapter(internal var arrayList: ArrayList<String>, internal var co
         return arrayList.size
     }
 
-    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvName: TextView = itemView.findViewById(R.id.tvName) as TextView
     }
 }
