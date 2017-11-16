@@ -1,0 +1,61 @@
+language: android
+sudo: required
+group: stable
+dist: precise
+jdk: oraclejdk8
+env:
+  global:
+    - GRADLE_OPTS="-Xmx512m"
+    - BUILD_TOOLS="26.0.1"
+    - TARGET_SDK=25
+  matrix:
+#    - EMULATOR_API=19 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis
+    - EMULATOR_API=21 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis
+#    - EMULATOR_API=24 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis
+#    - EMULATOR_API=25 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis
+matrix:
+  allow_failures:
+    - env: EMULATOR_API=24 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis
+ #   - env: EMULATOR_API=19 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis
+#    - env: EMULATOR_API=25 ANDROID_ABI=armeabi-v7a ANDROID_TAG=google_apis
+android:
+ components:
+ - tools
+ - platform-tools
+ - tools
+ - build-tools-$BUILD_TOOLS
+ - android-$EMULATOR_API
+ - android-$TARGET_SDK
+ - extra-google-m2repository
+ - extra-android-m2repository # for design library
+ - addon-google_apis-google-$TARGET_SDK # google play services
+ - sys-img-$ANDROID_ABI-addon-google_apis-google-$EMULATOR_API
+licenses:
+  - android-sdk-preview-license-.+
+  - android-sdk-license-.+
+  - google-gdk-license-.+
+before_script:
+  - echo no | android create avd --force -n test -t android-$EMULATOR_API --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
+script:
+   - ./gradlew connectedCheck
+after_success:
+   - bash <(curl -s https://codecov.io/bash)
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
+    - "${TRAVIS_BUILD_DIR}/android/gradle/caches/"
+    - "${TRAVIS_BUILD_DIR}/android/gradle/wrapper/dists/"
+branches:
+  only:
+    - master
+checkout:
+  post:
+- cp local.properties.ci local.properties
