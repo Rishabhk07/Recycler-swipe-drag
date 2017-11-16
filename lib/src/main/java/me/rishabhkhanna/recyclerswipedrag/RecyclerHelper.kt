@@ -9,19 +9,19 @@ import kotlin.collections.ArrayList
 /**
  * Created by rishabhkhanna on 14/11/17.
  */
-class RecyclerHelper<T>(var list: ArrayList<T>,var mAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) : ItemTouchHelper.Callback(), ItemTouchHelperAdapter {
+class RecyclerHelper<T>(var list: ArrayList<T>,var mAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) : ItemTouchHelper.Callback(){
 
     var onDragListener:onDragListener? = null
     var onSwipeListener:onSwipeListener? = null
     private var isItemDragEnabled:Boolean = false
     private var isItemSwipeEnbled:Boolean = false
 
-    override fun onMoved(fromPos: Int, toPos: Int) {
+    fun onMoved(fromPos: Int, toPos: Int) {
         list.removeAt(toPos)
         mAdapter.notifyItemRemoved(toPos)
     }
 
-    override fun onItemMoved(fromPosition: Int, toPosition: Int) {
+    fun onItemMoved(fromPosition: Int, toPosition: Int) {
         Collections.swap(list, fromPosition, toPosition)
         mAdapter.notifyItemMoved(fromPosition,toPosition)
     }
