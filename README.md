@@ -18,14 +18,6 @@ dependencies {
 }
 ```
 
-since all the android support libraries need to have a same version, you have export your projects support library version in project level `buil.gradle`, hence add these lines in your project level dependencies
-
-```groovy
-buildscript {
-    ext.supportsdk_version = "25.3.1"
-// here instead of 25.3.1 add your android support library version        
-}
-```
 
 ### Usage
  To use Recyclerview Swipe and Drag in your project, add the following lines and attach `ItemTouchHelper` with your `Recyclerview` object
