@@ -81,7 +81,8 @@ touchHelper
             }
         });
  ```
-- Example usage of library with model class for arraylist as Students
+## Example 
+ - example usage of library with model class for arraylist as Students
 ```java
 RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 ArrayList<Students> dataArrayList = new ArrayList();
