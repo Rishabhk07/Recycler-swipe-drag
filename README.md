@@ -30,11 +30,11 @@ buildscript {
  To use Recyclerview Swipe and Drag in your project, add the following lines and attach `ItemTouchHelper` with your `Recyclerview` object
    
 ```java
-    RecyclerHelper touchHelper = new RecyclerHelper<T>(dataArrayList, (RecyclerView.Adapter) recyclerAdapter);
-    touchHelper.setRecyclerItemDragEnabled(true);
-    touchHelper.setRecyclerItemSwipeEnabled(true);
-    ItemTouchHelper itemTouchHelper = new ItemTouchHelper(touchHelper);
-    itemTouchHelper.attachToRecyclerView(recyclerView);
+RecyclerHelper touchHelper = new RecyclerHelper<T>(dataArrayList, (RecyclerView.Adapter) recyclerAdapter);
+touchHelper.setRecyclerItemDragEnabled(true);
+touchHelper.setRecyclerItemSwipeEnabled(true);
+ItemTouchHelper itemTouchHelper = new ItemTouchHelper(touchHelper);
+itemTouchHelper.attachToRecyclerView(recyclerView);
 ```
 
  - here T is the generic, pass your arrayList model class here like String, Integer or Students
@@ -44,65 +44,65 @@ buildscript {
  - if you want to do some tasks like storing the list in db or sending a network request after swiping or dragging the recyclerview item then you can this with these 2 callbacks
  ```java
 //  callback for recyclerview item dragged from one position to other
- touchHelper.setOnDragItemListener(new OnDragListener() {
-             @Override
-             public void onDragItemListener(int fromPosition, int toPosition) {
-                 Log.d(TAG, "onDragItemListener: callback after dragging recycler view item");
-             }
-         });
-         
+    touchHelper.setOnDragItemListener(new OnDragListener() {
+        @Override
+        public void onDragItemListener(int fromPosition, int toPosition) {
+            Log.d(TAG, "onDragItemListener: callback after dragging recycler view item");
+        }
+    });
+
 // callback for recyclerview item swiped left or right        
-         touchHelper.setOnSwipeItemListener(new OnSwipeListener() {
-             @Override
-             public void onSwipeItemListener() {
-                 Log.d(TAG, "onSwipeItemListener: callback after swiping recycler view item");
-             }
-         });
+    touchHelper.setOnSwipeItemListener(new OnSwipeListener() {
+        @Override
+        public void onSwipeItemListener() {
+            Log.d(TAG, "onSwipeItemListener: callback after swiping recycler view item");
+        }
+    });
  ```
  
  - you can also use this library in fluid api like this
  
  ```java
-        RecyclerHelper touchHelper = new RecyclerHelper<String>(dataArrayList, (RecyclerView.Adapter) recyclerAdapter);
-        touchHelper
-                 .setRecyclerItemDragEnabled(true)
-                 .setRecyclerItemSwipeEnabled(true)
-                 .setOnDragItemListener(new OnDragListener() {
-                     @Override
-                     public void onDragItemListener(int fromPosition, int toPosition) {
-                         Log.d(TAG, "onDragItemListener: callback after dragging recycler view item");
-                     }
-                 })
-                 .setOnSwipeItemListener(new OnSwipeListener() {
-                     @Override
-                     public void onSwipeItemListener() {
-                         Log.d(TAG, "onSwipeItemListener: callback after swiping recycler view item");
-                     }
-                 });
+RecyclerHelper touchHelper = new RecyclerHelper<String>(dataArrayList, (RecyclerView.Adapter) recyclerAdapter);
+touchHelper
+        .setRecyclerItemDragEnabled(true)
+        .setRecyclerItemSwipeEnabled(true)
+        .setOnDragItemListener(new OnDragListener() {
+            @Override
+            public void onDragItemListener(int fromPosition, int toPosition) {
+                Log.d(TAG, "onDragItemListener: callback after dragging recycler view item");
+            }
+        })
+        .setOnSwipeItemListener(new OnSwipeListener() {
+            @Override
+            public void onSwipeItemListener() {
+                Log.d(TAG, "onSwipeItemListener: callback after swiping recycler view item");
+            }
+        });
  ```
 - Example usage of library with model class for arraylist as Students
 ```java
-recyclerView=(RecyclerView)findViewById(R.id.recyclerView);
-        ArrayList<Students> dataArrayList= new ArrayList();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(recyclerAdapter);
+RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+ArrayList<Students> dataArrayList = new ArrayList();
+recyclerView.setLayoutManager(new LinearLayoutManager(this));
+recyclerView.setAdapter(recyclerAdapter);
 
 //      Library addition from here
-        RecyclerHelper touchHelper=new RecyclerHelper<Students>(dataArrayList,(RecyclerView.Adapter)recyclerAdapter);
-        touchHelper.setRecyclerItemDragEnabled(true).setOnDragItemListener(new OnDragListener(){
-@Override
-public void onDragItemListener(int fromPosition,int toPosition){
-        Log.d(TAG,"onDragItemListener: callback after dragging recycler view item");
-        }
-        });
-        touchHelper.setRecyclerItemSwipeEnabled(true).setOnSwipeItemListener(new OnSwipeListener(){
-@Override
-public void onSwipeItemListener(){
-        Log.d(TAG,"onSwipeItemListener: callback after swiping recycler view item");
-        }
-        });
-        ItemTouchHelper itemTouchHelper=new ItemTouchHelper(touchHelper);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
+RecyclerHelper touchHelper = new RecyclerHelper<Students>(dataArrayList, (RecyclerView.Adapter) recyclerAdapter);
+touchHelper.setRecyclerItemDragEnabled(true).setOnDragItemListener(new OnDragListener() {
+    @Override
+    public void onDragItemListener(int fromPosition, int toPosition) {
+        Log.d(TAG, "onDragItemListener: callback after dragging recycler view item");
+    }
+});
+touchHelper.setRecyclerItemSwipeEnabled(true).setOnSwipeItemListener(new OnSwipeListener() {
+    @Override
+    public void onSwipeItemListener() {
+        Log.d(TAG, "onSwipeItemListener: callback after swiping recycler view item");
+    }
+});
+ItemTouchHelper itemTouchHelper = new ItemTouchHelper(touchHelper);
+itemTouchHelper.attachToRecyclerView(recyclerView);
 ```
 
 # License 
