@@ -30,14 +30,15 @@ buildscript {
  To use Recyclerview Swipe and Drag in your project, add the following lines and attach `ItemTouchHelper` with your `Recyclerview` object
    
 ```java
-        RecyclerHelper touchHelper = new RecyclerHelper<T>(dataArrayList, (RecyclerView.Adapter) recyclerAdapter);
-        touchHelper.setRecyclerItemDragEnabled(true);
-        touchHelper.setRecyclerItemSwipeEnabled(true);
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(touchHelper);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
+    RecyclerHelper touchHelper = new RecyclerHelper<T>(dataArrayList, (RecyclerView.Adapter) recyclerAdapter);
+    touchHelper.setRecyclerItemDragEnabled(true);
+    touchHelper.setRecyclerItemSwipeEnabled(true);
+    ItemTouchHelper itemTouchHelper = new ItemTouchHelper(touchHelper);
+    itemTouchHelper.attachToRecyclerView(recyclerView);
 ```
 
  - here T is the generic, pass your arrayList model class here like String, Integer or Students
+ - you have to pass the data array list and your recyclerview adapter to `RecyclerHelper` constructor
  - you have to cast your Recyclerview custom adapter in `Recyclerview.Adapter`, while passing it in RecyclerHelper
  - you can select if you want to enable your recycler view to have dragging items or swiping items or both , you can do this by passing boolean, in `touchHelper.setRecyclerItemDragEnabled(true);` or `touchHelper.setRecyclerItemSwipeEnabled(true);`, default is false for both.
  - if you want to do some tasks like storing the list in db or sending a network request after swiping or dragging the recyclerview item then you can this with these 2 callbacks
@@ -63,7 +64,7 @@ buildscript {
  
  ```java
         RecyclerHelper touchHelper = new RecyclerHelper<String>(dataArrayList, (RecyclerView.Adapter) recyclerAdapter);
-         touchHelper
+        touchHelper
                  .setRecyclerItemDragEnabled(true)
                  .setRecyclerItemSwipeEnabled(true)
                  .setOnDragItemListener(new OnDragListener() {
@@ -81,22 +82,28 @@ buildscript {
  ```
 - Example usage of library with model class for arraylist as Students
 ```java
-        RecyclerHelper touchHelper = new RecyclerHelper<Students>(dataArrayList, (RecyclerView.Adapter) recyclerAdapter);
-        touchHelper.setRecyclerItemDragEnabled(true).setOnDragItemListener(new OnDragListener() {
-            @Override
-            public void onDragItemListener(int fromPosition, int toPosition) {
-                Log.d(TAG, "onDragItemListener: callback after dragging recycler view item");
-            }
+recyclerView=(RecyclerView)findViewById(R.id.recyclerView);
+        ArrayList<Students> dataArrayList= new ArrayList();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(recyclerAdapter);
+
+//      Library addition from here
+        RecyclerHelper touchHelper=new RecyclerHelper<Students>(dataArrayList,(RecyclerView.Adapter)recyclerAdapter);
+        touchHelper.setRecyclerItemDragEnabled(true).setOnDragItemListener(new OnDragListener(){
+@Override
+public void onDragItemListener(int fromPosition,int toPosition){
+        Log.d(TAG,"onDragItemListener: callback after dragging recycler view item");
+        }
         });
-        touchHelper.setRecyclerItemSwipeEnabled(true).setOnSwipeItemListener(new OnSwipeListener() {
-            @Override
-            public void onSwipeItemListener() {
-                Log.d(TAG, "onSwipeItemListener: callback after swiping recycler view item");
-            }
+        touchHelper.setRecyclerItemSwipeEnabled(true).setOnSwipeItemListener(new OnSwipeListener(){
+@Override
+public void onSwipeItemListener(){
+        Log.d(TAG,"onSwipeItemListener: callback after swiping recycler view item");
+        }
         });
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(touchHelper);
+        ItemTouchHelper itemTouchHelper=new ItemTouchHelper(touchHelper);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 ```
 
 # License 
-This software is licensed under the Apache License V2.0 A copy can be found (here)[./LICENSE.md]
+This software is licensed under the Apache License V2.0 A copy can be found [here](./LICENSE.md)
