@@ -2,6 +2,7 @@ package me.rishabhkhanna.recyclerviewswipedrag
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,7 @@ class RecyclerAdapter(internal var arrayList: ArrayList<String>, internal var co
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         internal var tvName: TextView
         init {
-            tvName = itemView.findViewById(R.id.tvName)
+            tvName = itemView.findViewById(R.id.tvName) as TextView
         }
     }
 
