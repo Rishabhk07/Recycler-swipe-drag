@@ -9,9 +9,10 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import me.rishabhkhanna.recyclerswipedrag.RecyclerHelper;
 import me.rishabhkhanna.recyclerswipedrag.OnDragListener;
 import me.rishabhkhanna.recyclerswipedrag.OnSwipeListener;
+import me.rishabhkhanna.recyclerswipedrag.RecyclerHelper;
+
 
 public class MainActivity extends AppCompatActivity {
 
