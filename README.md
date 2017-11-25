@@ -17,6 +17,16 @@ dependencies {
     compile 'me.rishabhkhanna:RecyclerviewSwipeDrag:1.2.1'
 }
 ```
+_NOTE: If you get errors regarding conflicting versions of Android Support Library (Manifest merger error), exclude the transitive dependency when including my library_
+
+```groovy
+dependencies {
+    compile ('me.rishabhkhanna:RecyclerviewSwipeDrag:1.2.1') {
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+}
+
+```
 
 
 ### Usage
