@@ -28,7 +28,7 @@ class RecyclerAdapter(internal var arrayList: ArrayList<String>, internal var co
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         internal var tvName: TextView
         init {
-            tvName = itemView.findViewById(R.id.tvName) as TextView
+            tvName = itemView.findViewById(R.id.tvName)
         }
     }
 
