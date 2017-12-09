@@ -5,7 +5,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cd69e4e6889f4c4dbe4b9600b0aa4e10)](https://www.codacy.com/app/Rishabhk07/Recycler-swipe-drag?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Rishabhk07/Recycler-swipe-drag&amp;utm_campaign=Badge_Grade)
 
 
-Yet another recycler view drag and swipe library, this library provides long press drag and swipe for recycler view items, based on the awesome explanation by [Paul Burk](https://medium.com/@ipaulpro/drag-and-swipe-with-recyclerview-b9456d2b1aaf) & implemented in kotlin, video demo can be seen [here](https://youtu.be/MPlqJXkMG50)
+recycler view drag and swipe library, this library provides long press drag and swipe for recycler view items, based on the awesome explanation by [Paul Burk](https://medium.com/@ipaulpro/drag-and-swipe-with-recyclerview-b9456d2b1aaf) & implemented in kotlin, video demo can be seen [here](https://youtu.be/MPlqJXkMG50)
 ![](./demo.gif)
 
 # How to use 
